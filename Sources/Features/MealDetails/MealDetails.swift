@@ -58,29 +58,38 @@ public struct MealDetailsView: View {
   
   public var body: some View {
     List {
-      AsyncImage(url: URL(string: store.meal.strMealThumb)) { image in
-        image
-          .resizable()
-          .scaledToFit()
-          .frame(height: 150)
-          .frame(maxWidth: .infinity)
-        
-      } placeholder: {
-        ProgressView()
-          .frame(height: 150)
-          .frame(maxWidth: .infinity)
+      Section {
+        AsyncImage(url: URL(string: store.meal.strMealThumb)) { image in
+          image
+            .resizable()
+            .scaledToFit()
+            .frame(height: 150)
+            .frame(maxWidth: .infinity)
+          
+        } placeholder: {
+          ProgressView()
+            .frame(height: 150)
+            .frame(maxWidth: .infinity)
+        }
       }
-      
-      Section("Ingredients") {
-        ForEach(store.meal.ingredients) { value in
-          HStack {
-            Text(value.measurement)
-            Text(value.ingredient)
+      Section {
+        DisclosureGroup("Ingredients") {
+          ForEach(store.meal.ingredients) { value in
+            HStack {
+              Text(value.measurement)
+              Text(value.ingredient)
+            }
           }
+        }
+      }
+      Section {
+        DisclosureGroup("Instructions") {
+          Text(store.meal.strInstructions)
         }
       }
     }
     .navigationTitle(store.meal.strMeal)
+    .listStyle(.plain)
     .task { await send(.task).finish() }
   }
 }
