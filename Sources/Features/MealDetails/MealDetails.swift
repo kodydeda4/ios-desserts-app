@@ -97,11 +97,13 @@ public struct MealDetailsView: View {
 // MARK: - SwiftUI Previews
 
 #Preview {
-  NavigationStack {
-    MealDetailsView(store: Store(initialState: MealDetails.State(
-      meal: .previewValue
-    )) {
-      MealDetails()
-    })
+  Preview {
+    NavigationStack {
+      MealDetailsView(store: Store(initialState: MealDetails.State(
+        meal: .previewValue
+      )) {
+        MealDetails()
+      })
+    }
   }
 }

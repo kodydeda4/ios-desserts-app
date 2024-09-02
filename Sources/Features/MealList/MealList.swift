@@ -142,6 +142,7 @@ public struct MealListView: View {
         rowView(row)
       }
     }
+    .listStyle(.plain)
   }
   
   @MainActor private func rowView(_ row: MealList.State.Row) -> some View {
@@ -164,11 +165,13 @@ public struct MealListView: View {
 // MARK: - SwiftUI Previews
 
 #Preview {
-  NavigationStack {
-    MealListView(store: Store(initialState: MealList.State(
-      category: .dessert
-    )) {
-      MealList()
-    })
+  Preview {
+    NavigationStack {
+      MealListView(store: Store(initialState: MealList.State(
+        category: .dessert
+      )) {
+        MealList()
+      })
+    }
   }
 }

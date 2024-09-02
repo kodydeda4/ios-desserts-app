@@ -49,7 +49,9 @@ public struct AppView: View {
 // MARK: - SwiftUI Previews
 
 #Preview {
-  AppView(store: Store(initialState: AppReducer.State()) {
-    AppReducer()
-  })
+  Preview {
+    AppView(store: Store(initialState: AppReducer.State()) {
+      AppReducer()
+    })
+  }
 }
