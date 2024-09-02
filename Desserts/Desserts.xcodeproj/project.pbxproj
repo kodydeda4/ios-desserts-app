@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		335B5FF62C860224005F491A /* AppReducer in Frameworks */ = {isa = PBXBuildFile; productRef = 335B5FF52C860224005F491A /* AppReducer */; };
 		33A9A8472C85FE5400671814 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A9A8462C85FE5400671814 /* App.swift */; };
 		33A9A84B2C85FE5500671814 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33A9A84A2C85FE5500671814 /* Assets.xcassets */; };
 		33A9A84E2C85FE5500671814 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33A9A84D2C85FE5500671814 /* Preview Assets.xcassets */; };
@@ -25,18 +26,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335B5FF62C860224005F491A /* AppReducer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		335B5FF42C860224005F491A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		33A9A83A2C85FE5400671814 = {
 			isa = PBXGroup;
 			children = (
 				33A9A8542C85FEEB00671814 /* ios-desserts-app */,
 				33A9A8452C85FE5400671814 /* App */,
 				33A9A8442C85FE5400671814 /* Products */,
+				335B5FF42C860224005F491A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +92,9 @@
 			dependencies = (
 			);
 			name = Desserts;
+			packageProductDependencies = (
+				335B5FF52C860224005F491A /* AppReducer */,
+			);
 			productName = Desserts;
 			productReference = 33A9A8432C85FE5400671814 /* Desserts.app */;
 			productType = "com.apple.product-type.application";
@@ -195,7 +208,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -252,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -278,6 +291,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,6 +321,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,6 +357,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		335B5FF52C860224005F491A /* AppReducer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppReducer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 33A9A83B2C85FE5400671814 /* Project object */;
 }

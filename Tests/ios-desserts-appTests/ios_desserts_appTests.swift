@@ -1,7 +1,7 @@
-@testable import ios_desserts_app
+@testable import ios_meals_app
 import XCTest
 
-final class ios_desserts_appTests: XCTestCase {
+final class ios_meals_appTests: XCTestCase {
   func testExample() throws {
     // XCTest Documentation
     // https://developer.apple.com/documentation/xctest

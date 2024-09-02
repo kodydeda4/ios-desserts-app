@@ -1,10 +1,13 @@
+import AppReducer
 import SwiftUI
 
 @main
-struct DessertsApp: App {
+struct MealsApp: App {
   var body: some Scene {
     WindowGroup {
-      Text("Hello World")
+      AppView(store: .init(initialState: AppReducer.State()) {
+        AppReducer()
+      })
     }
   }
 }
