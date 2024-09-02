@@ -10,6 +10,7 @@ public struct MealList {
   public struct State: Equatable {
     let category: ApiClient.MealCategory
     var rows = IdentifiedArrayOf<Row>()
+    var inFlight = false
     @Presents var destination: Destination.State?
     
     struct Row: Identifiable, Equatable {
@@ -27,7 +28,7 @@ public struct MealList {
     case view(View)
     case destination(PresentationAction<Destination.Action>)
     case fetchMealsResponse(Result<[ApiClient.Meal], Error>)
-    case fetchMealDetailsResponse(Result<[ApiClient.MealDetails], Error>)
+    case fetchMealDetailsResponse(ApiClient.Meal.ID, Result<[ApiClient.MealDetails], Error>)
     
     public enum View {
       case task
@@ -44,6 +45,7 @@ public struct MealList {
       switch action {
         
       case let .fetchMealsResponse(result):
+        state.inFlight = false
         switch result {
           
         case let .success(value):
@@ -55,7 +57,9 @@ public struct MealList {
           return .none
         }
         
-      case let .fetchMealDetailsResponse(result):
+      case let .fetchMealDetailsResponse(id, result):
+        state.rows[id: id]?.inFlight = false
+        
         switch result {
           
         case let .success(value):
@@ -73,6 +77,7 @@ public struct MealList {
         switch action {
           
         case .task:
+          state.inFlight = true
           return .run { [category = state.category] send in
             await send(.fetchMealsResponse(Result {
               try await self.api.fetchAllMeals(category)
@@ -82,7 +87,9 @@ public struct MealList {
         case let .navigateToMealDetails(id):
           state.rows[id: id]?.inFlight = true
           return .run { send in
-            
+            await send(.fetchMealDetailsResponse(id, Result {
+              try await self.api.fetchMealDetailsById(id)
+            }))
           }
         }
         
@@ -112,13 +119,15 @@ public struct MealListView: View {
   }
   
   public var body: some View {
-    List {
-      ForEach(store.rows) { row in
-        rowView(row)
+    Group {
+      if store.inFlight {
+        ProgressView()
+      } else {
+        list
       }
     }
     .task { await send(.task).finish() }
-    .navigationTitle(store.category.description)
+    .navigationTitle(store.category.description.appending("s"))
     .navigationDestination(item: $store.scope(
       state: \.destination?.mealDetails,
       action: \.destination.mealDetails
@@ -127,13 +136,25 @@ public struct MealListView: View {
     }
   }
   
+  @MainActor private var list: some View {
+    List {
+      ForEach(store.rows) { row in
+        rowView(row)
+      }
+    }
+  }
+  
   @MainActor private func rowView(_ row: MealList.State.Row) -> some View {
     Button(action: { send(.navigateToMealDetails(id: row.id)) }) {
       HStack {
         Text(row.meal.strMeal)
+        Spacer()
         
         if row.inFlight {
           ProgressView()
+        } else {
+          Image(systemName: "chevron.forward")
+            .foregroundColor(.secondary)
         }
       }
     }

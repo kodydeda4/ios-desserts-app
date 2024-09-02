@@ -19,6 +19,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.11.2"),
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.0"),
     .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.6.0"),
     .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", branch: "main"),
   ],
@@ -66,7 +67,8 @@ extension Target {
       name: name,
       dependencies: dependencies + [
         "DesignSystem",
-        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Tagged", package: "swift-tagged"),
       ],
       path: "Sources/Features/\(name)"
