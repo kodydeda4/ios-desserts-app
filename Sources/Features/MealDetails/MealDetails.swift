@@ -57,11 +57,27 @@ public struct MealDetailsView: View {
   }
   
   public var body: some View {
-    VStack {
+    List {
       AsyncImage(url: URL(string: store.meal.strMealThumb)) { image in
-        image.resizable().scaledToFit()
+        image
+          .resizable()
+          .scaledToFit()
+          .frame(height: 150)
+          .frame(maxWidth: .infinity)
+        
       } placeholder: {
         ProgressView()
+          .frame(height: 150)
+          .frame(maxWidth: .infinity)
+      }
+      
+      Section("Ingredients") {
+        ForEach(store.meal.ingredients) { value in
+          HStack {
+            Text(value.measurement)
+            Text(value.ingredient)
+          }
+        }
       }
     }
     .navigationTitle(store.meal.strMeal)
