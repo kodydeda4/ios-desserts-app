@@ -34,6 +34,7 @@ public struct MealDetails {
         switch action {
           
         case .task:
+          print(state.meal)
           return .none
         }
         
@@ -64,17 +65,18 @@ public struct MealDetailsView: View {
       }
     }
     .navigationTitle(store.meal.strMeal)
+    .task { await send(.task).finish() }
   }
 }
 
 // MARK: - SwiftUI Previews
 
-//#Preview {
-//  NavigationStack {
-//    MealDetailsView(store: Store(initialState: MealDetails.State(
-//      meal: .previewValue
-//    )) {
-//      MealDetails()
-//    })
-//  }
-//}
+#Preview {
+  NavigationStack {
+    MealDetailsView(store: Store(initialState: MealDetails.State(
+      meal: .previewValue
+    )) {
+      MealDetails()
+    })
+  }
+}
