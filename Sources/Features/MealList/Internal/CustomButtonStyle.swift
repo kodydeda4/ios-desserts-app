@@ -8,15 +8,16 @@ struct CustomButtonStyle: ButtonStyle {
     var primaryColor: Color
     var borderColor: Color
     
-    init(configuration: ButtonStyleConfiguration) {
+    init(inFlight: Bool, configuration: ButtonStyleConfiguration) {
+      let isActive = inFlight || configuration.isPressed
       self.textColor = .primary
-      self.primaryColor = configuration.isPressed ? .orange : Color(.systemBackground)
-      self.borderColor = configuration.isPressed ? .orange : Color(.systemGray5)
+      self.primaryColor = isActive ? .orange : Color(.systemBackground)
+      self.borderColor = isActive ? .orange : Color(.systemGray5)
     }
   }
   
   func makeBody(configuration: Self.Configuration) -> some View {
-    let theme = Theme(configuration: configuration)
+    let theme = Theme(inFlight: inFlight, configuration: configuration)
     
     HStack {
       configuration.label
@@ -33,18 +34,16 @@ struct CustomButtonStyle: ButtonStyle {
     .padding(.vertical, 12)
     .frame(maxWidth: .infinity)
     .background {
-      theme.primaryColor
-        .opacity(!configuration.isPressed ? 1 : 0.25)
-        .overlay {
-          RoundedRectangle(cornerRadius: 8, style: .continuous)
-            .strokeBorder()
-            .foregroundColor(theme.borderColor)
-        }
+      theme.primaryColor.opacity(!(configuration.isPressed || inFlight) ? 1 : 0.25).overlay {
+        RoundedRectangle(cornerRadius: 8, style: .continuous)
+          .strokeBorder()
+          .foregroundColor(theme.borderColor)
+      }
     }
     .clipShape(RoundedRectangle(
       cornerRadius: 8,
       style: .continuous
     ))
-    .shadow(color: Color.black.opacity(0.15), radius: 10, y: 4)
+    .shadow(color: Color.black.opacity(0.15), radius: 4, y: 2)
   }
 }
