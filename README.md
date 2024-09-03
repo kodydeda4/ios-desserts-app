@@ -1,7 +1,6 @@
 # Desserts
  
- Desserts is a native iOS app that allows users to browse recipes using `https://themealdb.com/api.php` API.
-
+ Desserts is a native iOS app that allows users to browse recipes using `https://themealdb.com/api.php`.
 
 ## Architecture Overview
 
@@ -21,7 +20,7 @@ Dependencies are separated between the interface & implementation to keep SwiftU
 
 ### II. Features
 
-Features are implemented as Reducers, with view-actions isolated in their own enum, so that actions sent to the store can be easily distinguished. The app has 3 features:
+Features are defined as Reducers, containing State, Actions, and Dependencies. Actions which can be sent thru the view are defined as their own enum to keep the code easy to read.
 
 1. `AppReducer`
     * Root reducer of the app. You can add more features here if you like.
