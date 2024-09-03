@@ -80,10 +80,10 @@ public struct MealDetailsView: View {
 
       Section {
         DisclosureGroup {
-          ForEach(store.meal.ingredients) { value in
+          ForEach(store.meal.ingredientMeasures) { value in
             HStack {
-              Text(value.measurement)
-              Text(value.ingredient)
+              Text(value.strMeasure)
+              Text(value.strIngredient)
             }
             .appFont(.body)
           }
