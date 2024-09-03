@@ -9,7 +9,7 @@ This example shows how an app can be built in a modular & scalable way using SPM
 
 ### I. Dependencies
 
-Dependencies are separated between the interface & implementation to keep SwiftUI Previews fast. The live implementations are only imported when the app is ready to built for a device or simulator, and tye preview implementations provide mock-data for previews.
+Dependencies are separated between the interface & implementation to keep SwiftUI Previews fast. The live implementations are only imported when the app is ready to built for a device or simulator, and preview implementations provide mock-data for previews.
 
 1. `ApiClient`
     * Defines models & endpoints for the api.
