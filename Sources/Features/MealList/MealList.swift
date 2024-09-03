@@ -130,7 +130,8 @@ public struct MealListView: View {
       }
     }
     .task { await send(.task).finish() }
-    .navigationTitle(store.category.description.appending("s"))
+    .appFontNavigationTitle(store.category.description.appending("s"))
+    .navigationBarTitleDisplayMode(.inline)
     .navigationDestination(item: $store.scope(
       state: \.destination?.mealDetails,
       action: \.destination.mealDetails
@@ -147,6 +148,7 @@ public struct MealListView: View {
     List {
       ForEach(store.rows) { row in
         rowView(row)
+          .listRowSeparator(.hidden)
       }
     }
     .listStyle(.plain)
@@ -154,20 +156,13 @@ public struct MealListView: View {
   
   @MainActor private func rowView(_ row: MealList.State.Row) -> some View {
     Button(action: { send(.navigateToMealDetails(id: row.id)) }) {
-      HStack {
-        Text(row.meal.strMeal)
-        Spacer()
-        
-        if row.inFlight {
-          ProgressView()
-        } else {
-          Image(systemName: "chevron.forward")
-            .foregroundColor(.secondary)
-        }
-      }
+      Text(row.meal.strMeal)
+        .appFont(.body)
     }
+    .buttonStyle(CustomButtonStyle(inFlight: row.inFlight))
   }
 }
+
 
 // MARK: - SwiftUI Previews
 

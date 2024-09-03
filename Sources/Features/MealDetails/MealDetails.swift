@@ -37,10 +37,6 @@ public struct MealDetails {
           print(state.meal)
           return .none
         }
-        
-      default:
-        return .none
-        
       }
     }
   }
@@ -62,33 +58,51 @@ public struct MealDetailsView: View {
         AsyncImage(url: URL(string: store.meal.strMealThumb)) { image in
           image
             .resizable()
-            .scaledToFit()
-            .frame(height: 150)
+            .scaledToFill()
+            .frame(height: 200)
             .frame(maxWidth: .infinity)
-          
+            .clipped()
+            .background { Color.black }
+
         } placeholder: {
           ProgressView()
             .frame(height: 150)
             .frame(maxWidth: .infinity)
         }
       }
+      .listRowSeparator(.hidden, edges: .top)
+      .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+      .overlay {
+        RoundedRectangle(cornerRadius: 12, style: .continuous)
+          .strokeBorder()
+          .foregroundColor(Color(.systemGray4))
+      }
+
       Section {
-        DisclosureGroup("Ingredients") {
+        DisclosureGroup {
           ForEach(store.meal.ingredients) { value in
             HStack {
               Text(value.measurement)
               Text(value.ingredient)
             }
+            .appFont(.body)
           }
+        } label: {
+          Text("🛒 Ingredients")
+            .appFont(.body, .semibold)
         }
       }
       Section {
-        DisclosureGroup("Instructions") {
+        DisclosureGroup {
           Text(store.meal.strInstructions)
+            .appFont(.body)
+        } label: {
+          Text("📖 Instructions")
+            .appFont(.body, .semibold)
         }
       }
     }
-    .navigationTitle(store.meal.strMeal)
+    .appFontNavigationTitle(store.meal.strMeal)
     .listStyle(.plain)
     .task { await send(.task).finish() }
   }

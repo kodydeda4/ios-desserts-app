@@ -45,7 +45,7 @@ let package = Package(
     ]),
 
     // Libraries
-    .library("DesignSystem"),
+    .library("DesignSystem", resources: [.process("Fonts")]),
   ]
 )
 

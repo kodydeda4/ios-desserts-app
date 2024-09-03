@@ -22,8 +22,9 @@ public struct AppReducer {
   @Dependency(\.api) var api
   
   public var body: some ReducerOf<Self> {
-    Scope(state: \.mealList, action: \.mealList) { MealList() }
-      ._printChanges()
+    Scope(state: \.mealList, action: \.mealList) {
+      MealList()
+    }
   }
 }
 
