@@ -11,6 +11,7 @@ public struct MealList {
     let category: ApiClient.MealCategory
     var rows = IdentifiedArrayOf<Row>()
     var inFlight = false
+    var error: String?
     @Presents var destination: Destination.State?
     
     struct Row: Identifiable, Equatable {
@@ -53,7 +54,7 @@ public struct MealList {
           return .none
           
         case let .failure(error):
-          print(error.localizedDescription)
+          state.error = error.localizedDescription
           return .none
         }
         
@@ -69,7 +70,7 @@ public struct MealList {
           return .none
           
         case let .failure(error):
-          print(error.localizedDescription)
+          state.error = error.localizedDescription
           return .none
         }
         
@@ -122,6 +123,8 @@ public struct MealListView: View {
     Group {
       if store.inFlight {
         ProgressView()
+      } else if let error = store.error {
+        errorView(error)
       } else {
         list
       }
@@ -136,6 +139,10 @@ public struct MealListView: View {
     }
   }
   
+  @MainActor private func errorView(_ error: String) -> some View {
+    Text(error)
+  }
+
   @MainActor private var list: some View {
     List {
       ForEach(store.rows) { row in
