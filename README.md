@@ -1,7 +1,7 @@
 # Desserts
 Desserts is a native iOS app that allows users to browse recipes using `https://themealdb.com/api.php`.  
 
-<img width="500" alt="Group 2" src="https://github.com/user-attachments/assets/3f8d1cce-eaa4-498a-a3a7-d87e0566a2a7">
+<img width="500" alt="Group 2" src="https://github.com/user-attachments/assets/b788035e-faa8-488b-8c5d-bfed37e6dcdc">
 
 ## Architecture Overview
 
