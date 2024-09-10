@@ -84,7 +84,7 @@ extension Target {
         .product(name: "Tagged", package: "swift-tagged"),
         .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro"),
       ],
-      path: "Sources/Dependencies/\(name)"
+      path: "Sources/DependencyClients/\(name)"
     )
   }
 
